@@ -3,8 +3,8 @@
 include("config_bd.php");
 
 // Eliminar horário
-if (isset($_POST['eliminar'])) {
-    $id = $_POST['eliminar'];
+if (isset($_GET['eliminar'])) {
+    $id = $_GET['eliminar'];
     $stmt = $ligacao->prepare("DELETE FROM horarios WHERE id = ?");
     $stmt->execute([$id]);
     echo "<p class='mensagem-sucesso'>Horário eliminado com sucesso!</p>";
@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nome"]) && isset($_POS
 
 // Buscar horário para edição
 $horario_editar = null;
-if (isset($_POST["editar"])) {
-    $id = $_POST["editar"];
+if (isset($_GET["editar"])) {
+    $id = $_GET["editar"];
     $stmt = $ligacao->prepare("SELECT * FROM horarios WHERE id = ?");
     $stmt->execute([$id]);
     $horario_editar = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -89,14 +89,8 @@ $todos_horarios = $ligacao->query("SELECT * FROM horarios ORDER BY id DESC")->fe
                         <td><?php echo $linha["tempo_notificacao"] ?? "-"; ?></td>
                         <td><?php echo $linha["dias_semana"]; ?></td>
                         <td>
-                            <form method="post" style="display:inline-block;">
-                                <input type="hidden" name="editar" value="<?php echo $linha['id']; ?>">
-                                <button type="submit" class="botao">Editar</button>
-                            </form>
-                            <form method="post" onsubmit="return confirm('Eliminar este horário?')" style="display:inline-block;">
-                                <input type="hidden" name="eliminar" value="<?php echo $linha['id']; ?>">
-                                <button type="submit" class="botao">Eliminar</button>
-                            </form>
+                            <a href="?editar=<?php echo $linha['id']; ?>" class="botao" style="padding:6px 14px; font-size:0.9em;">Editar</a>
+                            <a href="?eliminar=<?php echo $linha['id']; ?>" class="botao" style="padding:6px 14px; font-size:0.9em;" style="background-color:#c00;" onclick="return confirm('Eliminar este horário?');">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

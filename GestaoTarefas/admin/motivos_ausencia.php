@@ -138,14 +138,8 @@ try {
     <td><?php echo htmlspecialchars($motivo['descricao']); ?></td>
     
 <td style="display:flex; gap:10px;">
-    <form method="get" style="display:inline">
-        <input type="hidden" name="editar" value="<?php echo $motivo['id']; ?>">
-        <button type="submit" class="botao" class="botao" style="background-color:#d4af37; color:black; font-weight:500; border:none; border-radius:10px; padding:15px 40px; width:250px; font-size:1.1em; box-shadow:0px 2px 5px rgba(0,0,0,0.2);" style="background-color:#d4af37; color:black; font-weight:500; border:none; border-radius:10px; padding:15px 40px; width:250px; font-size:1.1em; box-shadow:0px 2px 5px rgba(0,0,0,0.2);">Editar</button>
-    </form>
-    <form method="get" style="display:inline" onsubmit="return confirm('Tem a certeza que deseja eliminar este motivo?');">
-        <input type="hidden" name="eliminar" value="<?php echo $motivo['id']; ?>">
-        <button type="submit" class="botao" class="botao" style="background-color:#d4af37; color:black; font-weight:500; border:none; border-radius:10px; padding:15px 40px; width:250px; font-size:1.1em; box-shadow:0px 2px 5px rgba(0,0,0,0.2);" style="background-color:#d4af37; color:black; font-weight:500; border:none; border-radius:10px; padding:15px 40px; width:250px; font-size:1.1em; box-shadow:0px 2px 5px rgba(0,0,0,0.2);">Eliminar</button>
-    </form>
+    <a href="?editar=<?php echo $motivo['id']; ?>" class="botao" style="padding:6px 14px; font-size:0.9em;">Editar</a>
+    <a href="?eliminar=<?php echo $motivo['id']; ?>" class="botao" style="padding:6px 14px; font-size:0.9em;" style="background-color:#c00;" onclick="return confirm('Eliminar este motivo?');">Eliminar</a>
 </td>
 
 </tr>
